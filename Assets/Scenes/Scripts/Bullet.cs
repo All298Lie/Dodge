@@ -11,9 +11,6 @@ public class Bullet : MonoBehaviour {
         // 앞으로 speed 속도 만큼 계속 이동
         bulletRigidbody = GetComponent<Rigidbody>();
         bulletRigidbody.velocity = transform.forward * speed;
-
-        // 3초 뒤에 제거
-        Destroy(gameObject, 3.0f);
     }
 
     // Update is called once per frame
@@ -26,6 +23,8 @@ public class Bullet : MonoBehaviour {
             PlayerController playerController = other.GetComponent<PlayerController>();
             if (playerController != null)
                 playerController.Die();
+        } else if (other.tag == "Wall") {
+            Destroy(gameObject, 0.0f);
         }
     }
 }
